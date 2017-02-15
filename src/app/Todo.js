@@ -33,17 +33,25 @@ export class Todo extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          onChangeText={this.handleChange.bind(this)}
-          style={[styles.default, {height: 50}]}
-          value={this.state.newTodo}
-          placeholder="new Todo"
-        />
-        <TouchableOpacity onPress={this.handlePress.bind(this)}>
-          <Text>Create Todo</Text>
-        </TouchableOpacity>
+        <View style={styles.form}>
+          <TextInput
+            onChangeText={this.handleChange.bind(this)}
+            style={[styles.input, {height: 50}]}
+            value={this.state.newTodo}
+            placeholder="new Todo"
+          />
+          <TouchableOpacity
+            onPress={this.handlePress.bind(this)}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Create</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.todos}>
+
         {this.state.todos.map((todo, i) =>
-          <Text onPress={() => this.removeTodo.call(this,i)} key={i}>{todo}</Text>
+          <View style={styles.todo} key={i}>
+            <Text onPress={() => this.removeTodo.call(this,i)} style={styles.todoText}>{todo}</Text>
+          </View>
         )}
         {/* <TextInput
         {...this.props}
@@ -57,6 +65,7 @@ export class Todo extends Component {
         style={[styles.default, {height: Math.max(35, this.state.height)}]}
         value={this.state.newTodo}
       /> */}
+        </View>
       </View>
     );
   }
@@ -65,18 +74,37 @@ export class Todo extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    padding: 20
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  form: {
+    flexDirection: 'row',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input: {
+   flex: 0.7,
+   fontSize: 24,
   },
+  button: {
+   flex: 0.3,
+   borderWidth: 1,
+   height: 50,
+   borderColor: 'blue',
+   borderRadius: 3,
+   justifyContent: 'center',
+   alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  todos: {
+    marginTop: 60,
+  },
+  todo: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
+    marginBottom: 10,
+  },
+  todoText: {
+    fontSize: 24
+  }
 });
