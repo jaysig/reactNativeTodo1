@@ -29,19 +29,31 @@ export default class Todo extends Component {
 
   }
 
-  handlePress() {
-    
+  handlePress(e) {
+    e.preventDefault();
+    let todos = [...this.state.todos, this.state.newTodo];
+    this.setState({todos, newTodo:''});
+  }
+
+  removeTodo(i){
+    const todos = [...this.state.todos.slice(0,i), this.state.todos.slice(i + 1)]
+    this.setState({todos});
   }
   render() {
     return (
       <View style={styles.container}>
         <TextInput
           onChange={this.handleChange.bind(this)}
-          style={[styles.default, {height: 50}]} />
+          style={[styles.default, {height: 50}]}
+          value={this.state.newTodo}
+          placeholder="new Todo"
+        />
         <TouchableHighlight onPress={this.handlePress.bind(this)}>
-          <Text>Tap me</Text>
+          <Text>Create Todo</Text>
         </TouchableHighlight>
-        {this.state.todos.map(todo => <Text>{todo}</Text>)}
+        {this.state.todos.map((todo, i) =>
+          <Text onPress={() => this.removeTodo.call(this,i)} key={todo}>{todo}</Text>
+        )}
         {/* <TextInput
         {...this.props}
         multiline={true}
