@@ -12,19 +12,16 @@ export class Todo extends Component {
   constructor() {
     super();
     this.state = {
-      todos: [1,2,3],
+      todos: [],
       newTodo: ''
     }
   }
 
-  handleChange(e) {
-    const { value } = e.target;
-    this.setState({newTodo: value})
-
+  handleChange(text) {
+    this.setState({newTodo: text})
   }
 
-  handlePress(e) {
-    e.preventDefault();
+  handlePress() {
     let todos = [...this.state.todos, this.state.newTodo];
     this.setState({todos, newTodo:''});
   }
@@ -37,16 +34,16 @@ export class Todo extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-          onChange={this.handleChange.bind(this)}
+          onChangeText={this.handleChange.bind(this)}
           style={[styles.default, {height: 50}]}
           value={this.state.newTodo}
           placeholder="new Todo"
         />
-        <TouchableHighlight onPress={this.handlePress.bind(this)}>
+        <TouchableOpacity onPress={this.handlePress.bind(this)}>
           <Text>Create Todo</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
         {this.state.todos.map((todo, i) =>
-          <Text onPress={() => this.removeTodo.call(this,i)} key={todo}>{todo}</Text>
+          <Text onPress={() => this.removeTodo.call(this,i)} key={i}>{todo}</Text>
         )}
         {/* <TextInput
         {...this.props}

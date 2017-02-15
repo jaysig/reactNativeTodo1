@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, StyleSheet, } from 'react-native';
 import { Todo } from './src/app/Todo';
 
 const Main = () => (<Todo />);
