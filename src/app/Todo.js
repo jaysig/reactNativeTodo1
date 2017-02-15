@@ -4,10 +4,11 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 
-export default class Todo extends Component {
+export class Todo extends Component {
   constructor() {
     super();
     this.state = {
