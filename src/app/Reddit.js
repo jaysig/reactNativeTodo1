@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = (dispatch) => ({
   addRedditPost(post = { name: 'new post' }) {
+    console.log(post);
     dispatch({ type: ADD_POST, payload: post });
   },
 });
