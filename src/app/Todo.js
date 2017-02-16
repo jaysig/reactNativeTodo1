@@ -22,8 +22,23 @@ export class Todo extends Component {
   }
 
   handlePress() {
-    let todos = [...this.state.todos, this.state.newTodo];
-    this.setState({todos, newTodo:''});
+    fetch({
+      url: 'http://localhost:3000/todos',
+      method: 'post',
+      body: JSON.stringify({
+        name: this.state.newTodo,
+        number: 2,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data =>{
+      let todos = [...this.state.todos, data];
+      this.setState({todos, newTodo:''});
+    })
+
   }
 
   removeTodo(i){
@@ -50,7 +65,7 @@ export class Todo extends Component {
 
         {this.state.todos.map((todo, i) =>
           <View style={styles.todo} key={i}>
-            <Text onPress={() => this.removeTodo.call(this,i)} style={styles.todoText}>{todo}</Text>
+            <Text onPress={() => this.removeTodo.call(this,i)} style={styles.todoText}>{todo.name}</Text>
           </View>
         )}
         {/* <TextInput
