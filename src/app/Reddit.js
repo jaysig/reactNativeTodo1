@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import {View, Text} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { ADD_POST } from './reducers';
 
-export const _Reddit  = (props) => (
-    <View>
-      {props.posts.map(post => <Text>{post.name }</Text>)}
-    </View>
-)
+export const _Reddit = (props) => (
+  <View>
+    {props.posts.map(post => <Text>{post.name }</Text>)}
+    <TouchableOpacity>
+      <Text onPress={props.addRedditPost}>Add</Text>
+    </TouchableOpacity>
+  </View>
+);
 const mapStateToProps = (state) => ({
-  posts: state.reddit
-})
-export const Reddit = connect(mapStateToProps, null)(_Reddit)
+  posts: state.reddit,
+});
+
+const mapActionsToProps = (dispatch) => ({
+  addRedditPost(post = { name: 'new post' }) {
+    dispatch({ type: ADD_POST, payload: post });
+  },
+});
+export const Reddit = connect(mapStateToProps, mapActionsToProps)(_Reddit);
   // constructor() {
   //   super();
   //   this.state = {
