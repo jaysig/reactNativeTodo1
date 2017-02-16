@@ -1,5 +1,6 @@
 const FETCH_POSTS = 'FETCH_POSTS';
 const FETCH_POSTS_COMPLETE = 'FETCH_POSTS_COMPLETE';
+const ADD_POSTS = 'ADD_POSTS';
 import { combineReducers } from 'redux'
 
 export const reddit = (state = [

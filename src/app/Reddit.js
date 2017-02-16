@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 export const _Reddit  = (props) => (
     <View>
-      {this.props.posts.map(post => <Text>{post.name }</Text>)}
+      {props.posts.map(post => <Text>{post.name }</Text>)}
     </View>
 )
 const mapStateToProps = (state) => ({
